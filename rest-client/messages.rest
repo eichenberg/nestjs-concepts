@@ -73,8 +73,7 @@ Content-Type: application/json
 {
   "content": "Hello, new World!",
   "from": "User1 updated",
-  "to": "User2 updated",
-  "createdAt": "2025-07-01T12:00:00Z"
+  "to": "User2 updated"
 }
 
 ###

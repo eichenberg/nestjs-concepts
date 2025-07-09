@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3000
+
+###
+# @name MessagesController
+# @method POST
+# @path /messages
+# @responses
+# - status: 201
+#   description: Creates a new message.
+#   body: "Message created"
+# @tags
+# - Messages
+# @example
+#   curl -X POST http://localhost:3000/messages -d '{"content": "Hello, World!"}'
+#   # Response: "Message created"
+POST {{baseUrl}}/messages
+Content-Type: application/json
+
+{
+  "content": "Hello, World!",
+  "from": "User1",
+  "to": "User2"
+}
+

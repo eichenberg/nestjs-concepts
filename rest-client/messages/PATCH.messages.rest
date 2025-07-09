@@ -1,0 +1,23 @@
+@baseUrl = http://localhost:3000
+
+###
+# @name MessagesController
+# @method PATCH
+# @path /messages/:id
+# @responses
+# - status: 200
+#   description: Updates an existing message.
+#   body: "Message updated"
+# @tags
+# - Messages
+# @example
+#   curl -X PATCH http://localhost:3000/messages/1 -d '{"content": "Updated message"}'
+#   # Response: "Message updated"
+PATCH {{baseUrl}}/messages/1
+Content-Type: application/json
+
+{
+  "content": "Hello, new World!",
+  "from": "User1 updated",
+  "to": "User2 updated"
+}

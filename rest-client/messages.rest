@@ -30,7 +30,7 @@ GET {{baseUrl}}/messages
 # @example
 #   curl -X GET http://localhost:3000/messages/1
 #   # Response: "Single message"
-GET {{baseUrl}}/messages/5
+GET {{baseUrl}}/messages/1/
 
 ###
 # @name MessagesController
@@ -49,7 +49,10 @@ POST {{baseUrl}}/messages
 Content-Type: application/json
 
 {
-  "content": "Hello, World!"
+  "content": "Hello, World!",
+  "from": "User1",
+  "to": "User2",
+  "createdAt": "2023-10-01T12:00:00Z"
 }
 
 ###
@@ -69,7 +72,10 @@ PATCH {{baseUrl}}/messages/1
 Content-Type: application/json
 
 {
-  "content": "Updated message"
+  "content": "Hello, new World!",
+  "from": "User1 updated",
+  "to": "User2 updated",
+  "createdAt": "2025-07-01T12:00:00Z"
 }
 
 ###
@@ -84,4 +90,4 @@ Content-Type: application/json
 # @example
 #   curl -X DELETE http://localhost:3000/messages/1
 #   # Response: No content
-DELETE {{baseUrl}}/messages/1
+DELETE {{baseUrl}}/messages/11

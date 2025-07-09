@@ -1,45 +1,69 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Message } from './entity/message.entity';
 
 @Injectable()
 export class MessagesService {
-  private messages: string[] = [
-    'Message 1',
-    'Message 2',
-    'Message 3',
-    'Message 4',
-    'Message 5',
+  private lastId = 1;
+
+  private messages: Message[] = [
+    {
+      id: 1,
+      content: 'Message 1',
+      from: 'User A',
+      to: 'User B',
+      isRead: false,
+      date: new Date(),
+    },
   ];
 
-  getListOfMessages(): string[] {
+  getListOfMessages(): Message[] {
     return this.messages;
   }
 
-  getSingleMessage(id: number): string {
-    this.validateMessageId(id);
-    return this.messages[--id];
-  }
+  getSingleMessage(id: number): Message {
+    const message = this.messages.find(message => message.id == id);
 
-  createMessage(message: Message): void {
-    this.messages.push(message.content);
-  }
-
-  updateMessage(id: number, message: Message): void {
-    this.validateMessageId(id);
-    this.messages[--id] = message.content;
-  }
-
-  deleteMessage(id: number): void {
-    this.validateMessageId(id);
-    this.messages.splice(--id, 1);
-  }
-
-  private validateMessageId(id: number): void {
-    if (id < 0 || id > this.messages.length) {
-      throw new Error(`Message ID not found: ${id}`);
+    if (message) {
+      return message;
     }
-  }
-}
 
-export interface Message {
-  content: string;
+    throw new NotFoundException(`Message not found for id: ${id}`);
+  }
+
+  createMessage(message: Message): Message {
+    this.lastId++;
+    const newMessage = {
+      ...message,
+      id: this.lastId,
+    };
+    this.messages.push(newMessage);
+    return newMessage;
+  }
+
+  updateMessage(id: number, message: Message): Message {
+    const messageIndex = this.messages.findIndex(message => message.id == id);
+
+    if (messageIndex < 0) {
+      throw new NotFoundException(`Message not found for id: ${id}`);
+    }
+
+    this.messages[messageIndex] = {
+      ...this.messages[messageIndex],
+      ...message,
+    };
+
+    return this.messages[messageIndex];
+  }
+
+  deleteMessage(id: number): Message {
+    const messageIndex = this.messages.findIndex(message => message.id == id);
+
+    if (messageIndex < 0) {
+      throw new NotFoundException(`Message not found for id: ${id}`);
+    }
+
+    const messageDeleted = this.messages[messageIndex];
+    this.messages.splice(messageIndex, 1);
+    return messageDeleted;
+  }
 }

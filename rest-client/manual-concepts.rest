@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3000
+
+### ManualConceptsController
+# @name ManualConceptsController
+# @description This controller handles manual concepts.
+# @method GET
+# @path /manual-concepts
+# @responses
+# - status: 200
+#   description: Returns a list of manual concepts.
+#   body: "List of manual concepts"
+# @tags
+# - ManualConcepts
+# @example
+#   curl -X GET http://localhost:3000/manual-concepts
+#   # Response: "List of manual concepts"
+GET {{baseUrl}}/manual-concepts

@@ -15,15 +15,23 @@ export class MessagesService {
   }
 
   getSingleMessage(id: number): string {
-    if (id < 0 || id > this.messages.length) {
-      throw new Error(`Message ID not found: ${id}`);
-    }
-
+    this.validateMessageId(id);
     return this.messages[--id];
   }
 
   createMessage(message: Message): void {
     this.messages.push(message.content);
+  }
+
+  updateMessage(id: number, message: Message): void {
+    this.validateMessageId(id);
+    this.messages[--id] = message.content;
+  }
+
+  private validateMessageId(id: number): void {
+    if (id < 0 || id > this.messages.length) {
+      throw new Error(`Message ID not found: ${id}`);
+    }
   }
 }
 

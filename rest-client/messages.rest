@@ -72,3 +72,16 @@ Content-Type: application/json
   "content": "Updated message"
 }
 
+###
+# @name MessagesController
+# @method DELETE
+# @path /messages/:id
+# @responses
+# - status: 204
+#   description: Deletes a message.
+# @tags
+# - Messages
+# @example
+#   curl -X DELETE http://localhost:3000/messages/1
+#   # Response: No content
+DELETE {{baseUrl}}/messages/1

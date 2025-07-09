@@ -28,6 +28,11 @@ export class MessagesService {
     this.messages[--id] = message.content;
   }
 
+  deleteMessage(id: number): void {
+    this.validateMessageId(id);
+    this.messages.splice(--id, 1);
+  }
+
   private validateMessageId(id: number): void {
     if (id < 0 || id > this.messages.length) {
       throw new Error(`Message ID not found: ${id}`);

@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Message } from './entity/message.entity';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
 
 @Injectable()
 export class MessagesService {
@@ -30,17 +32,19 @@ export class MessagesService {
     throw new NotFoundException(`Message not found for id: ${id}`);
   }
 
-  createMessage(message: Message): Message {
-    this.lastId++;
+  createMessage(createMessageDto: CreateMessageDto): Message {
+    const id = ++this.lastId;
     const newMessage = {
-      ...message,
-      id: this.lastId,
+      id,
+      ...createMessageDto,
+      isRead: false,
+      date: new Date(),
     };
     this.messages.push(newMessage);
     return newMessage;
   }
 
-  updateMessage(id: number, message: Message): Message {
+  updateMessage(id: number, updateMessageDto: UpdateMessageDto): Message {
     const messageIndex = this.messages.findIndex(message => message.id == id);
 
     if (messageIndex < 0) {
@@ -49,7 +53,7 @@ export class MessagesService {
 
     this.messages[messageIndex] = {
       ...this.messages[messageIndex],
-      ...message,
+      ...updateMessageDto,
     };
 
     return this.messages[messageIndex];

@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3000
+
+### AutomaticConceptsController
+# @name AutomaticConceptsController
+# @description This controller handles automatic concepts.
+# @method GET
+# @path /automatic-concepts
+# @responses
+# - status: 200
+#   description: Returns a list of automatic concepts.
+#   body: "List of automatic concepts"
+# @tags
+# - AutomaticConcepts
+# @example
+#   curl -X GET http://localhost:3000/automatic-concepts
+#   # Response: "List of automatic concepts"
+GET {{baseUrl}}/automatic-concepts

@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ManualConceptsModule } from '../manual-concepts/manual-concepts.module';
 import { AutomaticConceptsModule } from '../automatic-concepts/automatic-concepts.module';
+import { MessagesModule } from 'src/messages/messages.module';
 
 @Module({
-  imports: [ManualConceptsModule, AutomaticConceptsModule],
+  imports: [ManualConceptsModule, AutomaticConceptsModule, MessagesModule],
   controllers: [AppController],
   providers: [AppService],
 })

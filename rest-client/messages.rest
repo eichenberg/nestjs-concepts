@@ -1,0 +1,53 @@
+@baseUrl = http://localhost:3000
+
+### AutomaticConceptsController
+# @name MessagesController
+# @description This controller handles messages.
+
+# @method GET
+# @path /messages
+# @responses
+# - status: 200
+#   description: Returns a list of messages.
+#   body: "List of messages"
+# @tags
+# - Messages
+# @example
+#   curl -X GET http://localhost:3000/messages
+#   # Response: "List of messages"
+GET {{baseUrl}}/messages
+
+###
+# @name MessagesController
+# @method GET
+# @path /messages/:id
+# @responses
+# - status: 200
+#   description: Returns a single message.
+#   body: "Single message"
+# @tags
+# - Messages
+# @example
+#   curl -X GET http://localhost:3000/messages/1
+#   # Response: "Single message"
+GET {{baseUrl}}/messages/5
+
+###
+# @name MessagesController
+# @method POST
+# @path /messages
+# @responses
+# - status: 201
+#   description: Creates a new message.
+#   body: "Message created"
+# @tags
+# - Messages
+# @example
+#   curl -X POST http://localhost:3000/messages -d '{"content": "Hello, World!"}'
+#   # Response: "Message created"
+POST {{baseUrl}}/messages
+Content-Type: application/json
+
+{
+  "content": "Hello, World!"
+}

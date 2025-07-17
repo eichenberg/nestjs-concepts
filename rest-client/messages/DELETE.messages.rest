@@ -12,4 +12,4 @@
 # @example
 #   curl -X DELETE http://localhost:3000/messages/1
 #   # Response: No content
-DELETE {{baseUrl}}/messages/11
+DELETE {{baseUrl}}/messages/5

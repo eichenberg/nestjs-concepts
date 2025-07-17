@@ -66,15 +66,13 @@ export class MessagesService {
     return this.messages[messageIndex];
   }
 
-  deleteMessage(id: number): Message {
-    const messageIndex = this.messages.findIndex(message => message.id == id);
+  async deleteMessage(id: number): Promise<Message> {
+    const message = await this.messageRepository.findOneBy({ id });
 
-    if (messageIndex < 0) {
+    if (!message) {
       throw new NotFoundException(`Message not found for id: ${id}`);
     }
 
-    const messageDeleted = this.messages[messageIndex];
-    this.messages.splice(messageIndex, 1);
-    return messageDeleted;
+    return await this.messageRepository.remove(message);
   }
 }

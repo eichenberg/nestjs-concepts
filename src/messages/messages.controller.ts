@@ -41,7 +41,7 @@ export class MessagesController {
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number): Message {
+  delete(@Param('id', ParseIntPipe) id: number): Promise<Message> {
     return this.messagesService.deleteMessage(id);
   }
 }

@@ -28,7 +28,7 @@ export class MessagesController {
   }
 
   @Post()
-  create(@Body() createMessageDto: CreateMessageDto): Message {
+  create(@Body() createMessageDto: CreateMessageDto): Promise<Message> {
     return this.messagesService.createMessage(createMessageDto);
   }
 

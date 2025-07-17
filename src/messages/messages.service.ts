@@ -39,16 +39,16 @@ export class MessagesService {
     throw new NotFoundException(`Message not found for id: ${id}`);
   }
 
-  createMessage(createMessageDto: CreateMessageDto): Message {
-    const id = ++this.lastId;
+  async createMessage(createMessageDto: CreateMessageDto): Promise<Message> {
     const newMessage = {
-      id,
       ...createMessageDto,
       isRead: false,
       date: new Date(),
     };
-    this.messages.push(newMessage);
-    return newMessage;
+
+    const recado = this.messageRepository.create(newMessage);
+
+    return await this.messageRepository.save(recado);
   }
 
   updateMessage(id: number, updateMessageDto: UpdateMessageDto): Message {

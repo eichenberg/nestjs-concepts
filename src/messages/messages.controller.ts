@@ -36,7 +36,7 @@ export class MessagesController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateMessageDto: UpdateMessageDto,
-  ): Message {
+  ): Promise<Message> {
     return this.messagesService.updateMessage(id, updateMessageDto);
   }
 

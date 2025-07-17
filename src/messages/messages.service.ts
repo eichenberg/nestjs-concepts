@@ -12,19 +12,6 @@ export class MessagesService {
     private readonly messageRepository: Repository<Message>,
   ) {}
 
-  private lastId = 1;
-
-  private messages: Message[] = [
-    {
-      id: 1,
-      content: 'Message 1',
-      from: 'User A',
-      to: 'User B',
-      isRead: false,
-      date: new Date(),
-    },
-  ];
-
   async getListOfMessages(): Promise<Message[]> {
     return this.messageRepository.find();
   }
@@ -51,19 +38,20 @@ export class MessagesService {
     return await this.messageRepository.save(recado);
   }
 
-  updateMessage(id: number, updateMessageDto: UpdateMessageDto): Message {
-    const messageIndex = this.messages.findIndex(message => message.id == id);
+  async updateMessage(
+    id: number,
+    updateMessageDto: UpdateMessageDto,
+  ): Promise<Message> {
+    const message = await this.messageRepository.preload({
+      id,
+      ...updateMessageDto,
+    });
 
-    if (messageIndex < 0) {
+    if (!message) {
       throw new NotFoundException(`Message not found for id: ${id}`);
     }
 
-    this.messages[messageIndex] = {
-      ...this.messages[messageIndex],
-      ...updateMessageDto,
-    };
-
-    return this.messages[messageIndex];
+    return this.messageRepository.save(message);
   }
 
   async deleteMessage(id: number): Promise<Message> {

@@ -18,12 +18,12 @@ export class MessagesController {
   constructor(private readonly messagesService: MessagesService) {}
 
   @Get()
-  findAll(): Message[] {
+  findAll(): Promise<Message[]> {
     return this.messagesService.getListOfMessages();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Message {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Message> {
     return this.messagesService.getSingleMessage(id);
   }
 

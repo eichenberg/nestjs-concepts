@@ -13,11 +13,11 @@
 # @example
 #   curl -X PATCH http://localhost:3000/messages/1 -d '{"content": "Updated message"}'
 #   # Response: "Message updated"
-PATCH {{baseUrl}}/messages/1
+PATCH {{baseUrl}}/messages/6
 Content-Type: application/json
 
 {
-  "content": "Hello, new World!",
+  "content": "Hello, new World updated!",
   "from": "User1 updated",
   "to": "User2 updated"
 }

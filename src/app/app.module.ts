@@ -5,12 +5,14 @@ import { ManualConceptsModule } from '../manual-concepts/manual-concepts.module'
 import { AutomaticConceptsModule } from '../automatic-concepts/automatic-concepts.module';
 import { MessagesModule } from 'src/messages/messages.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PersonModule } from 'src/people/person.module';
 
 @Module({
   imports: [
     ManualConceptsModule,
     AutomaticConceptsModule,
     MessagesModule,
+    PersonModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
